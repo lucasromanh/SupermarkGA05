@@ -4,13 +4,13 @@ public class Detalle {
 
 	private Producto producto;
 	private Integer cantidad;
-	private Float descuento;
+	private TipoProducto tipoproducto;
 	
-	public Detalle(Producto producto, Integer cantidad, Float descuento) {
+	public Detalle(Producto producto, Integer cantidad, TipoProducto tipoproducto) {
 		super();
 		this.producto = producto;
 		this.cantidad = cantidad;
-		this.descuento = descuento;
+		this.tipoproducto = tipoproducto;
 	}
 	public Producto getProducto() {
 		return producto;
@@ -24,11 +24,14 @@ public class Detalle {
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
-	public Float getDescuento() {
-		return descuento;
+	public TipoProducto gettipoproducto() {
+		return tipoproducto;
 	}
-	public void setDescuento(Float descuento) {
-		this.descuento = descuento;
+	public void settipoproducto(Float descuento) {
+		extracted(tipoproducto);
+	}
+	private TipoProducto extracted(TipoProducto tipoproducto) {
+		return this.tipoproducto = tipoproducto;
 	}
 	
 	

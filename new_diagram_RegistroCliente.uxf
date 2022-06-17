@@ -1,1 +1,169 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><umlet_diagram></umlet_diagram>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>295</y>
+      <w>220</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>supermark::Cliente
+--
+-nombre: String
+-apellido: String
+-dni: long
+-domicilio: String
+-edad: int
+--
++Cliente(String nom, String ape, long dni, String dom, int edad): ctor
++Cliente(String nom, String ape, long dni, String dom): ctor
++setNombre(String nombre): void
++getNombre(): String
++setApellido(String apellido): void
++setEdad(int edad): void
++getDomicilio(): String
++getDNI(): long
++mostrar(): void
++esMayor(): boolean
++esMayor(String pais): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>315</x>
+      <y>295</y>
+      <w>285</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>supermark::Domicilio
+--
+-Barrio: String
+-calle: String
+-numero: Integer
+-piso: Integer
+-depNum: Integer
+--
++domicilio(String barrio, String calle, Integer numero, Integer piso, Integer depNum): void
++getBarrio(): String
++setBarrio(String barrio): void
++getCalle(): String
++setCalle(String calle): void
++getNumero(): Integer
++setNumero(Integer numero): void
++getPiso(): Integer
++setPiso(Integer piso): void
++getDepNum(): Integer
++setDepNum(Integer depNum): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>245</x>
+      <y>130</y>
+      <w>145</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>supermark::Registro
+--
+-id: String
+-contraseña: String
+--
++Registro(String id, String contraseña): ctor
++getId(): String
++setId(String id): void
++getContraseña(): String
++setContraseña(String contraseña): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>210</y>
+      <w>70</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>335</x>
+      <y>210</y>
+      <w>60</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>220</x>
+      <y>220</y>
+      <w>75</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+r1=Registro
+m2=1
+r2=Cliente
+</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>220</y>
+      <w>70</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+r1=Registro
+m2=1
+r2=Domicilio
+</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>265</x>
+      <y>445</y>
+      <w>85</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>150.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>255</x>
+      <y>460</y>
+      <w>125</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+r1=Cliente
+m2=1..n
+r2=Domicilio
+</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;150.0;180.0;10.0</additional_attributes>
+  </element>
+</diagram>
