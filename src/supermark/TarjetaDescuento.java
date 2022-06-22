@@ -39,8 +39,34 @@ public class TarjetaDescuento {
 	
 	public void acumula_puntos (Integer punto) {
 		int puntaje = this.getPuntos() + punto;
+	}
+		
+			
+	public double porcentaje (double total) {
+		
+		double totalfinal;
+		double descuento;
+		double puntaje = this.getPuntos();
+		if( puntaje == 5) {
+			descuento = total*0.05;
+			totalfinal = total-descuento;
+		}
+			
+		else { 
+			if( puntaje == 10) {
+				descuento = total*0.1;
+				totalfinal = total-descuento;
+			}
+			else {
+				if( puntaje == 15) {
+					descuento = total*0.15;
+					totalfinal = total-descuento;
+					puntaje = 0;
+				}
+			}
 		
 		
 	}
 	
+	}
 }
