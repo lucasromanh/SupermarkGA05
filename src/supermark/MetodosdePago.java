@@ -2,49 +2,41 @@ package supermark;
 
 public class MetodosdePago {
 	
-	private Integer PagoEfectivo;
-	private String Tarjeta;
-	private String transferencia;
-	private String  QR;
+	private PagoEfectivo PagoEfectivo;
+	private PagoTarjeta Tarjeta;
+	private Transferencia transferencia;
 	
 	
-	public MetodosdePago(Integer efectivo, String tarjeta, String transferencia, String qR) {
+	public MetodosdePago(supermark.PagoEfectivo efectivo, PagoTarjeta tarjeta, Transferencia transferencia ) {
 		super();
 		PagoEfectivo = efectivo;
 		Tarjeta = tarjeta;
 		this.transferencia = transferencia;
-		QR = qR;
+		
 	}
 	public MetodosdePago() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Integer getPagoEfectivo() {
+	public PagoEfectivo getPagoEfectivo() {
 		return PagoEfectivo;
 	}
-	public void setEfectivo(Integer efectivo) {
+	public void setEfectivo(supermark.PagoEfectivo efectivo) {
 		PagoEfectivo = efectivo;
 	}
-	public String getTarjeta() {
+	public PagoTarjeta getTarjeta() {
 		return Tarjeta;
 	}
-	public void setTarjeta(String tarjeta) {
+	public void setTarjeta(PagoTarjeta tarjeta) {
 		Tarjeta = tarjeta;
 	}
-	public String getTransferencia() {
+	public Transferencia getTransferencia() {
 		return transferencia;
 	}
-	public void setTransferencia(String transferencia) {
+	public void setTransferencia(Transferencia transferencia) {
 		this.transferencia = transferencia;
 	}
-	public String getQR() {
-		return QR;
-	}
-	public void setQR(String qR) {
-		QR = qR;
-	}
-	
-	
+
 	
 	
 

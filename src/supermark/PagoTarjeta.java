@@ -2,7 +2,8 @@ package supermark;
 import java.util.*;
 
 public class PagoTarjeta {
-
+	
+	private Cliente Cliente;
 	private String Pagotarjeta_debito;
 	private String Pagotarjeta_crédito;
 	private String banco_emisor;
@@ -13,10 +14,12 @@ public class PagoTarjeta {
 	private Float monto_a_pagar;
 	private Integer cuotas;
 	
-	public PagoTarjeta(String pagotarjeta_debito, String pagotarjeta_crédito, String banco_emisor,
-			Integer numero_tarjeta, String nombre_tarjeta, Date fecha_vencimiento, Integer cod_Seg, Float monto_a_pagar,
-			Integer cuotas) {
+	
+	public PagoTarjeta(supermark.Cliente cliente, String pagotarjeta_debito, String pagotarjeta_crédito,
+			String banco_emisor, Integer numero_tarjeta, String nombre_tarjeta, Date fecha_vencimiento, Integer cod_Seg,
+			Float monto_a_pagar, Integer cuotas) {
 		super();
+		Cliente = cliente;
 		Pagotarjeta_debito = pagotarjeta_debito;
 		Pagotarjeta_crédito = pagotarjeta_crédito;
 		this.banco_emisor = banco_emisor;
@@ -80,5 +83,11 @@ public class PagoTarjeta {
 	}
 	public void setCuotas(Integer cuotas) {
 		this.cuotas = cuotas;
+	}
+	public Cliente getCliente() {
+		return Cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		Cliente = cliente;
 	}
 }

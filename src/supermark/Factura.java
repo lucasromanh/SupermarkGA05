@@ -1,83 +1,99 @@
 package supermark;
-import java.util.*;
-public class Factura {
+
+import java.util.Date;
+
+public class Factura extends Comprobante {
 	
-	private String nombre;
+	private String nombre_supermark;
 	private String cuit;
 	private String direccion;
 	private String provincia;
 	private int codigoPostal;
 	private float telefono;
-	private double id;
-	private Date fecha;
-	private String hora;
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getCuit() {
-		return cuit;
-	}
-	public void setCuit(String cuit) {
-		this.cuit = cuit;
-	}
-	public String getDireccion() {
-		return direccion;
-	}
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-	public String getProvincia() {
-		return provincia;
-	}
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	}
-	public int getCodigoPostal() {
-		return codigoPostal;
-	}
-	public void setCodigoPostal(int codigoPostal) {
-		this.codigoPostal = codigoPostal;
-	}
-	public float getTelefono() {
-		return telefono;
-	}
-	public void setTelefono(float telefono) {
-		this.telefono = telefono;
-	}
-	public double getId() {
-		return id;
-	}
-	public void setId(double id) {
-		this.id = id;
-	}
-	public Date getFecha() {
-		return fecha;
-	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-	public String getHora() {
-		return hora;
-	}
-	public void setHora(String hora) {
-		this.hora = hora;
-	}
-	public Factura(String nombre, String cuit, String direccion, String provincia, int codigoPostal, float telefono,
-			double id, Date fecha, String hora) {
-		super();
-		this.nombre = nombre;
+	private double id_Factura;
+
+public Factura(Integer id, Float total, Date fecha, Cliente destinatario, String nombre_supermark, String cuit,
+			String direccion, String provincia, int codigoPostal, float telefono, double id_Factura) {
+		super(id, total, fecha, destinatario);
+		this.nombre_supermark = nombre_supermark;
 		this.cuit = cuit;
 		this.direccion = direccion;
 		this.provincia = provincia;
 		this.codigoPostal = codigoPostal;
 		this.telefono = telefono;
-		this.id = id;
-		this.fecha = fecha;
-		this.hora = hora;
+		this.id_Factura = id_Factura;
 	}
+
+
+public String getNombre_supermark() {
+	return nombre_supermark;
+}
+
+
+public void setNombre_supermark(String nombre_supermark) {
+	this.nombre_supermark = nombre_supermark;
+}
+
+
+public String getCuit() {
+	return cuit;
+}
+
+
+public void setCuit(String cuit) {
+	this.cuit = cuit;
+}
+
+
+public String getDireccion() {
+	return direccion;
+}
+
+
+public void setDireccion(String direccion) {
+	this.direccion = direccion;
+}
+
+
+public String getProvincia() {
+	return provincia;
+}
+
+
+public void setProvincia(String provincia) {
+	this.provincia = provincia;
+}
+
+
+public int getCodigoPostal() {
+	return codigoPostal;
+}
+
+
+public void setCodigoPostal(int codigoPostal) {
+	this.codigoPostal = codigoPostal;
+}
+
+
+public float getTelefono() {
+	return telefono;
+}
+
+
+public void setTelefono(float telefono) {
+	this.telefono = telefono;
+}
+
+
+public double getId_Factura() {
+	return id_Factura;
+}
+
+
+public void setId_Factura(double id_Factura) {
+	this.id_Factura = id_Factura;
+}
+
 
 public void compra_producto(double precio, int cantidad,String nomProducto, String marca){
 	double pago=precio*cantidad;
@@ -94,11 +110,11 @@ public void compra_producto(double precio, int cantidad,String nomProducto, Stri
 public void encabezadoFactura( ) {
 
 	System.out.println("-------------FACTURA------------");
-	System.out.println(getNombre() +"\n"+getCuit()+ "\n"
+	System.out.println(getNombre_supermark() +"\n"+getCuit()+ "\n"
 	+getDireccion()+"\n"+getProvincia()+
 	"\n"+getCodigoPostal()+"\n"+getTelefono()+
 	"------------------------------"+"\n Nro. Factura: "+getId()+
-	"\n Fecha: "+ getFecha()+"\n Hora: "+getHora()+
+	"\n Fecha: "+ getFecha() +
 	"\n ------------------------------");
 	
 

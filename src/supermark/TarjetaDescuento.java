@@ -44,7 +44,7 @@ public class TarjetaDescuento {
 			
 	public double porcentaje (double total) {
 		
-		double totalfinal;
+		double totalfinal = 0;
 		double descuento;
 		double puntaje = this.getPuntos();
 		if( puntaje == 5) {
@@ -62,11 +62,13 @@ public class TarjetaDescuento {
 					descuento = total*0.15;
 					totalfinal = total-descuento;
 					puntaje = 0;
+					
+				
 				}
 			}
 		
-		
 	}
+		return totalfinal;
 	
 	}
 }

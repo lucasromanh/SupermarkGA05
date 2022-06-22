@@ -3,10 +3,10 @@ public class Cliente {
 	private String nombre;
 	private String apellido;
 	private long dni;
-	private String domicilio;
+	private Domicilio domicilio;
 	private int edad;
 	
-	public Cliente(String nom,String ape,long dni,String dom,int edad) {
+	public Cliente(String nom,String ape,long dni,Domicilio dom,int edad) {
 		this.nombre = nom;
 		this.apellido = ape;
 		this.dni = dni;
@@ -14,7 +14,7 @@ public class Cliente {
 		this.edad = edad;
 	}
 	
-	public Cliente(String nom,String ape,long dni,String dom) {
+	public Cliente(String nom,String ape,long dni,Domicilio dom) {
 		this.nombre = nom;
 		this.apellido = ape;
 		this.dni = dni;
@@ -37,7 +37,7 @@ public class Cliente {
 		this.edad = edad;
 	}
 	
-	public String getDomicilio() {
+	public Domicilio getDomicilio() {
 		return this.domicilio;
 	}
 	

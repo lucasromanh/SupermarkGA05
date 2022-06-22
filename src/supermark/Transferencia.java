@@ -1,14 +1,12 @@
 package supermark;
 
-import java.util.Arrays;
-
 public class Transferencia {
-	private Arrays Cliente;
+	private Cliente Cliente;
 	private Integer cvu;
 	private Integer cbu;
 	private String alias;
 	
-	public Transferencia(Arrays cliente, Integer cVU, Integer cBU, String alias) {
+	public Transferencia(supermark.Cliente cliente, Integer cVU, Integer cBU, String alias) {
 		super();
 		Cliente = cliente;
 		cvu = cVU;
@@ -16,11 +14,11 @@ public class Transferencia {
 		this.alias = alias;
 }
 
-	public Arrays getCliente() {
+	public supermark.Cliente getCliente() {
 		return Cliente;
 	}
 
-	public void setCliente(Arrays cliente) {
+	public void setCliente(supermark.Cliente cliente) {
 		Cliente = cliente;
 	}
 

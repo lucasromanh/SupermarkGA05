@@ -7,7 +7,9 @@ public class Comprobante {
 	private Date fecha;
 	private HashMap <Integer , Detalle > detalle;
 	private Cliente destinatario;
+	
 	public Comprobante(Integer id, Float total, Date fecha, Cliente destinatario) {
+		
 		super();
 		this.id = id;
 		this.total = total;

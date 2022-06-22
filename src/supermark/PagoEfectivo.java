@@ -3,11 +3,11 @@ package supermark;
 import java.util.*;
 
 public class PagoEfectivo {
-	private String Cliente;
-	public String getCliente() {
+	private Cliente Cliente;
+	public Cliente getCliente() {
 		return Cliente;
 	}
-	public void setCliente(String cliente) {
+	public void setCliente(supermark.Cliente cliente) {
 		Cliente = cliente;
 	}
 	public Date getFecha() {
@@ -22,7 +22,7 @@ public class PagoEfectivo {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	public PagoEfectivo(String cliente, Date fecha, double total) {
+	public PagoEfectivo(supermark.Cliente cliente, Date fecha, double total) {
 		super();
 		Cliente = cliente;
 		this.fecha = fecha;
