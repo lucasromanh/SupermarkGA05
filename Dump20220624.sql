@@ -25,13 +25,15 @@ DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cliente` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL,
   `nombre` varchar(30) DEFAULT NULL,
   `apellido` varchar(30) DEFAULT NULL,
   `dni` double unsigned DEFAULT NULL,
-  `ID_domicilio` int NOT NULL,
+  `id_domicilio` int NOT NULL,
   `edad` int unsigned NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `domicilio_fk` (`id_domicilio`),
+  CONSTRAINT `domicilio_fk` FOREIGN KEY (`id_domicilio`) REFERENCES `domicilio` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -53,10 +55,11 @@ DROP TABLE IF EXISTS `comprobante`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comprobante` (
   `id` int NOT NULL,
-  `total` double NOT NULL,
   `fecha` date DEFAULT NULL,
+  `id_cliente` int NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `cliente` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`)
+  KEY `cliente_comp` (`id_cliente`),
+  CONSTRAINT `cliente_comp` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -78,11 +81,18 @@ DROP TABLE IF EXISTS `detalle`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detalle` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `id_detalle` int NOT NULL,
+  `id_producto` int NOT NULL,
+  `id_tipoproducto` int NOT NULL,
+  `id_cliente` int NOT NULL,
   `cantidad` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `cliente_de` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`),
-  CONSTRAINT `producto_fk` FOREIGN KEY (`id`) REFERENCES `producto` (`id`),
-  CONSTRAINT `tipoproducto_fk` FOREIGN KEY (`id`) REFERENCES `tipoproducto` (`id`)
+  KEY `producto_de` (`id_producto`),
+  KEY `tipoproducto_de` (`id_tipoproducto`),
+  KEY `cliente_de` (`id_cliente`),
+  CONSTRAINT `cliente_de` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `producto_de` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`),
+  CONSTRAINT `tipoproducto_de` FOREIGN KEY (`id_tipoproducto`) REFERENCES `tipoproducto` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -109,8 +119,7 @@ CREATE TABLE `domicilio` (
   `numero` int NOT NULL,
   `piso` int DEFAULT NULL,
   `depNum` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `cliente_dom` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -138,9 +147,13 @@ CREATE TABLE `factura` (
   `provincia` varchar(20) DEFAULT NULL,
   `codigoPostal` int NOT NULL,
   `telefono` int NOT NULL,
+  `id_comprobante` int NOT NULL,
+  `id_MetododePago` int NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `comprobante_fc` FOREIGN KEY (`id`) REFERENCES `comprobante` (`id`),
-  CONSTRAINT `comprobante_mp` FOREIGN KEY (`id`) REFERENCES `metododepago` (`id`)
+  KEY `comprobante_fac` (`id_comprobante`),
+  KEY `MetododePago_fac` (`id_MetododePago`),
+  CONSTRAINT `comprobante_fac` FOREIGN KEY (`id_comprobante`) REFERENCES `comprobante` (`id`),
+  CONSTRAINT `MetododePago_fac` FOREIGN KEY (`id_MetododePago`) REFERENCES `metododepago` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -151,6 +164,34 @@ CREATE TABLE `factura` (
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hashmap`
+--
+
+DROP TABLE IF EXISTS `hashmap`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `hashmap` (
+  `id` int NOT NULL,
+  `id_detalle` int NOT NULL,
+  `id_comprobante` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `detalle_hp` (`id_detalle`),
+  KEY `comprobante_hp` (`id_comprobante`),
+  CONSTRAINT `comprobante_hp` FOREIGN KEY (`id_comprobante`) REFERENCES `comprobante` (`id`),
+  CONSTRAINT `detalle_hp` FOREIGN KEY (`id_detalle`) REFERENCES `detalle` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hashmap`
+--
+
+LOCK TABLES `hashmap` WRITE;
+/*!40000 ALTER TABLE `hashmap` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hashmap` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -165,11 +206,12 @@ CREATE TABLE `metododepago` (
   `PagoEfectivo` varchar(50) DEFAULT NULL,
   `PagoTarjeta` varchar(50) DEFAULT NULL,
   `Transferencia` varchar(50) DEFAULT NULL,
-  `monto_a_pagar` double NOT NULL,
+  `monto_a_pagar` float DEFAULT NULL,
+  `fechadepago` date DEFAULT NULL,
+  `id_cliente` int NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `cliente_fk` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`),
-  CONSTRAINT `metododepago_ibfk_1` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`),
-  CONSTRAINT `metododepago_ibfk_2` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`)
+  KEY `cliente_fk` (`id_cliente`),
+  CONSTRAINT `cliente_fk` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -192,8 +234,10 @@ DROP TABLE IF EXISTS `pagoefectivo`;
 CREATE TABLE `pagoefectivo` (
   `id` int NOT NULL,
   `pagoefectivo` int unsigned NOT NULL,
+  `id_metododepago` int NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `cliente_id` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`)
+  KEY `metododepago_fk` (`id_metododepago`),
+  CONSTRAINT `metododepago_fk` FOREIGN KEY (`id_metododepago`) REFERENCES `metododepago` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -223,9 +267,10 @@ CREATE TABLE `pagotarjeta` (
   `fecha_vencimiento` date NOT NULL,
   `cod_seg` int NOT NULL,
   `cuotas` int NOT NULL,
+  `id_MetododePago` int NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `cliente_pt` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`),
-  CONSTRAINT `monto_a_pagar` FOREIGN KEY (`id`) REFERENCES `metododepago` (`id`)
+  KEY `MetododePago` (`id_MetododePago`),
+  CONSTRAINT `MetododePago` FOREIGN KEY (`id_MetododePago`) REFERENCES `metododepago` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -246,12 +291,12 @@ DROP TABLE IF EXISTS `producto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `producto` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(30) NOT NULL,
+  `id` int NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
   `marca` varchar(50) DEFAULT NULL,
-  `f_venc` date NOT NULL,
-  `precio` double NOT NULL,
-  `stock` int DEFAULT NULL,
+  `fecha_vto` date DEFAULT NULL,
+  `precio` double DEFAULT NULL,
+  `stock` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -276,9 +321,13 @@ CREATE TABLE `registro` (
   `id` int NOT NULL AUTO_INCREMENT,
   `mail` varchar(30) NOT NULL,
   `contraseña` varchar(30) NOT NULL,
+  `id_domicilio` int NOT NULL,
+  `id_cliente` int NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `cliente_reg` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`),
-  CONSTRAINT `domicilio_reg` FOREIGN KEY (`id`) REFERENCES `domicilio` (`id`)
+  KEY `domicilio_reg` (`id_domicilio`),
+  KEY `cliente_reg` (`id_cliente`),
+  CONSTRAINT `cliente_reg` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `domicilio_reg` FOREIGN KEY (`id_domicilio`) REFERENCES `domicilio` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -301,8 +350,10 @@ DROP TABLE IF EXISTS `tarjetadescuento`;
 CREATE TABLE `tarjetadescuento` (
   `id` int NOT NULL,
   `puntos` int unsigned DEFAULT NULL,
+  `id_cliente` int NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `cliente_td` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`)
+  KEY `cliente_td` (`id_cliente`),
+  CONSTRAINT `cliente_td` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -323,12 +374,12 @@ DROP TABLE IF EXISTS `tipoproducto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tipoproducto` (
+  `id` int NOT NULL,
   `p_limpieza` varchar(50) DEFAULT NULL,
   `p_hig_personal` varchar(50) DEFAULT NULL,
   `perecederos` varchar(50) DEFAULT NULL,
   `no_perecederos` varchar(50) DEFAULT NULL,
   `bebidas` varchar(50) DEFAULT NULL,
-  `id` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -354,8 +405,10 @@ CREATE TABLE `trasferencia` (
   `cvu` int NOT NULL,
   `cbu` int NOT NULL,
   `alias` varchar(30) DEFAULT NULL,
+  `id_MetododePago` int NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `cliente_tr` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`)
+  KEY `MetododePago_tf` (`id_MetododePago`),
+  CONSTRAINT `MetododePago_tf` FOREIGN KEY (`id_MetododePago`) REFERENCES `metododepago` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -377,4 +430,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-23 18:13:48
+-- Dump completed on 2022-06-24  0:23:28
