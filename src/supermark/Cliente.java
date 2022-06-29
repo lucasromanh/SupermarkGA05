@@ -69,4 +69,16 @@ public class Cliente {
 			return this.esMayor();
 		}
 	}
+
+	public String getApellido() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getEdad() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
