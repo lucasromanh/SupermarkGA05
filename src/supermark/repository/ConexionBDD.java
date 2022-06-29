@@ -7,23 +7,21 @@ import java.sql.Statement;
 
 public class ConexionBDD {
 	
-	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost:3306/supermark_ga05";
+	private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+	private String DB_URL = "jdbc:mysql://localhost:3306/";
 	//Credenciales de la BDD
-	static final String USER = "root";
-	static final String PASS = "Micram135+";
+	private static final String USER = "root";
+	private static final String PASS = "Micram135+";
 	
-	public ConexionBDD(String string) {
-		// TODO Auto-generated constructor stub
+	private Connection conn = null;
+	private Statement stmt = null;//Objeto para realizar las declaraciones SQL que requiramos
+	private ResultSet rs = null;
+	
+	public ConexionBDD(String db) {
+		this.DB_URL += db;
 	}
-
-
-
-	public static void main(String[] args) {
-		Connection conn = null;
-		Statement stmt = null;//Objeto para realizar las declaraciones SQL que requiramos
-		ResultSet rs = null;//Conjunto de resultados
-		
+	
+	public void connect() {
 		try {
 			Class.forName(JDBC_DRIVER);
 			
@@ -31,36 +29,14 @@ public class ConexionBDD {
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);//Me conecto a la base datos
 			
 			System.out.println("Creando sentencias SQL...");
-			stmt = conn.createStatement();//Especificamos que crearemos una sentencia SQL sobre la conexion previamente creada
-			String sql = "SELECT cliente.id,cliente.nombre,cliente.apellido,cliente.dni,cliente.id_domicilio,cliente.edad FROM supermark_ga05.cliente";
-			rs = stmt.executeQuery(sql);  //Ejecuto la consulta SELECT
-			//String sql2 = "INSERT INTO universidad.departamento (departamento.nombre) VALUE ('Nutrición')";
-			//stmt.executeUpdate(sql2); Crear Reed Upload Delete 
-			
-//			while (rs.next()) {//Mientras exista un fila siguiente/Elementos en el conjunto
-//				int id = rs.getInt("id");
-//				String nombre = rs.getString("nombre");
-				String apellido = rs.getString("apellido");
-//				long dni = rs.getLong("dni");
-//				int id_domicilio = rs.getInt("id_domicilio");
-//				int edad = rs.getInt("edad");
-				
-				
-				System.out.println("id: "+id);
-				System.out.println("nombre: "+nombre);
-				System.out.println("apellido: "+apellido);
-				System.out.println("dni: "+dni);
-				System.out.println("id_domicilio: "+id_domicilio);
-				System.out.println("edad: "+edad);
-			}
-			
+			//Especificamos que crearemos una sentencia SQL sobre la conexion previamente creada
+			stmt = conn.createStatement();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			try {
-				rs.close();
 				stmt.close();
 				conn.close();
 			} catch (SQLException e) {
@@ -69,16 +45,43 @@ public class ConexionBDD {
 		}
 
 	}
-
-	public void connect() {
-		// TODO Auto-generated method stub
-		
 	}
 
-	public Object getStmt() {
-		// TODO Auto-generated method stub
-		return null;
+	public void close() {
+		try {
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
+
+	public Connection getConn() {
+		return conn;
+	}
+
+	public void setConn(Connection conn) {
+		this.conn = conn;
+	}
+
+	public Statement getStmt() {
+		return stmt;
+	}
+
+	public void setStmt(Statement stmt) {
+		this.stmt = stmt;
+	}
+
+	public ResultSet getRs() {
+		return rs;
+	}
+
+	public void setRs(ResultSet rs) {
+		this.rs = rs;
+	}
+
+	
 
 
 }
