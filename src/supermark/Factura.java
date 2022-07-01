@@ -1,6 +1,6 @@
 package supermark;
+import java.sql.Timestamp;
 
-import java.util.Date;
 
 public class Factura extends Comprobante {
 	
@@ -12,7 +12,7 @@ public class Factura extends Comprobante {
 	private float telefono;
 	private double id_Factura;
 
-public Factura(Integer id, Float total, Date fecha, Cliente destinatario, String nombre_supermark, String cuit,
+public Factura(Integer id, Float total, Timestamp fecha, Cliente destinatario, String nombre_supermark, String cuit,
 			String direccion, String provincia, int codigoPostal, float telefono, double id_Factura) {
 		super(id, total, fecha, destinatario);
 		this.nombre_supermark = nombre_supermark;

@@ -1,20 +1,23 @@
 package supermark;
+import java.sql.Timestamp;
 import java.util.*;
 
 public class Comprobante {
 	private Integer id;
 	private Float total;
-	private Date fecha;
+	private Timestamp fecha;
 	private HashMap <Integer , Detalle > detalle;
 	private Cliente destinatario;
 	
-	public Comprobante(Integer id, Float total, Date fecha, Cliente destinatario) {
+	public Comprobante(Integer id, Float total, Timestamp fecha, Cliente destinatario) {
 		
 		super();
 		this.id = id;
 		this.total = total;
 		this.fecha = fecha;
 		this.destinatario = destinatario;
+	
+	
 	}
 	public Integer getId() {
 		return id;
@@ -31,7 +34,7 @@ public class Comprobante {
 	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
 	public Cliente getDestinatario() {
@@ -45,6 +48,10 @@ public class Comprobante {
 	}
 	public void setDetalle(HashMap <Integer , Detalle > detalle) {
 		this.detalle = detalle;
+	}
+	public Object getPagotarjeta() {
+		
+		return null;
 	}
 	
 }

@@ -80,5 +80,12 @@ public class Cliente {
 		return null;
 	}
 
+	public String getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 }
