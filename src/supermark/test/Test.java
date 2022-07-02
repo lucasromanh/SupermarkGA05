@@ -39,9 +39,8 @@ public class Test {
 		PagoTarjeta tc = new PagoTarjeta(null, null, null, 123456, null, null, null, null, null);
 		Comprobante comp = new Comprobante (
 					1,
-					000000001,
+					12f,
 					new Timestamp(System.currentTimeMillis()),
-					detalles,
 					user
 					);
 		cc.registrarCompra(comp);
