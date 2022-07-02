@@ -45,6 +45,7 @@ public class ConexionBDD {
 		}
 
 	}
+<<<<<<< HEAD
 	
 
 	public void close() {
@@ -61,6 +62,24 @@ public class ConexionBDD {
 		return conn;
 	}
 
+=======
+	}
+
+	public void close() {
+		try {
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Connection getConn() {
+		return conn;
+	}
+
+>>>>>>> a9ebfeeb4bccae25dc7902e90eb63888a6c4e202
 	public void setConn(Connection conn) {
 		this.conn = conn;
 	}
